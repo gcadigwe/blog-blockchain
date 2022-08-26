@@ -22,5 +22,5 @@ func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (
 	// TODO: Handling the message
 	// _ = ctx
 
-	return &types.MsgCreatePostResponse{}, nil
+	return &types.MsgCreatePostResponse{id: id}, nil
 }
