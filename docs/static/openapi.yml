@@ -126,6 +126,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/blog/blog/comment/{id}':
@@ -242,6 +252,9 @@ paths:
                       type: string
                     body:
                       type: string
+                    createdAt:
+                      type: string
+                      format: int64
               pagination:
                 type: object
                 properties:
@@ -331,6 +344,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -30725,12 +30748,18 @@ definitions:
         format: int32
   blog.blog.MsgCreateCommentResponse:
     type: object
+    properties:
+      id:
+        type: string
+        format: uint64
   blog.blog.MsgCreatePostResponse:
     type: object
     properties:
       id:
         type: string
         format: uint64
+  blog.blog.MsgDeleteCommentResponse:
+    type: object
   blog.blog.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -30746,6 +30775,9 @@ definitions:
         type: string
       body:
         type: string
+      createdAt:
+        type: string
+        format: int64
   blog.blog.QueryAllCommentResponse:
     type: object
     properties:
@@ -30839,6 +30871,9 @@ definitions:
               type: string
             body:
               type: string
+            createdAt:
+              type: string
+              format: int64
       pagination:
         type: object
         properties:

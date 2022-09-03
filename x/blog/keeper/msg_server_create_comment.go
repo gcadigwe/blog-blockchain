@@ -7,6 +7,7 @@ import (
 	"blog/x/blog/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) CreateComment(goCtx context.Context, msg *types.MsgCreateComment) (*types.MsgCreateCommentResponse, error) {
@@ -27,7 +28,7 @@ func (k msgServer) CreateComment(goCtx context.Context, msg *types.MsgCreateComm
 		CreatedAt: int32(ctx.BlockHeight()),
 	}
 
-	if comment.CreatedAt > post.CreatedAt+100 {
+	if comment.CreatedAt > int32(post.CreatedAt+100) {
 		return nil, sdkerrors.Wrapf(types.ErrCommentOld, "Comment created at %d is older than post created at %d", comment.CreatedAt, post.CreatedAt)
 
 	}
